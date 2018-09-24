@@ -160,8 +160,7 @@ namespace test2
                     StreamWriter sw = new StreamWriter(File.OpenWrite(outputFile));
 
 
-                    sw.Write("test");
-                    sw.Dispose();
+                    //sw.Write("test");
                     MessageBox.Show(outputFile);
 
                     int counter = 1;
@@ -197,7 +196,7 @@ namespace test2
                         string locationCode = line.Substring(128,2).Trim();
                         string meterReaderCode = line.Substring(130,2).Trim();
                         string recordType = line.Substring(132,2).Trim();
-                        string recordStatus = line.Substring(134,1).Trim();
+                        string recordStatus = line.Substring(134,1).Trim(); 
                         string date = line.Substring(135,6).Trim();
                         string time = line.Substring(141,6).Trim();
                         string typeOfReading = line.Substring(147,1).Trim();
@@ -267,16 +266,18 @@ namespace test2
                             {
                                 if(item != "")
                                 {
-                                    MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not valid");
+                                    sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not valid");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not valid");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
                             }
 
                         }
@@ -288,16 +289,18 @@ namespace test2
                             {
                                 if (item != "")
                                 {
-                                    MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is valid");
+                                    //MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is valid");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is not valid");
+                                    sw.WriteLine("Line: " + counter + " -" + variableName + " " + item + " is not valid");
+                                    //MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is not valid");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is not A or I");
+                                sw.WriteLine("Line: " + counter + " -" + variableName + " " + item + " is not A or I");
+                                //MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is not A or I");
                             }
                         }
                         countOfList = 0;
@@ -328,16 +331,18 @@ namespace test2
                             {
                                 if (item != "")
                                 {
-                                    MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not valid");
+                                    sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not valid");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not valid");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not numeric");
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not numeric");
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not numeric");
                             }
 
                         }
@@ -406,75 +411,153 @@ namespace test2
                             {
                                 if (item != "")
                                 {
-                                    MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is null");
+                                    //sw.Write("Line: " + counter + " - " + variableName + " " + item + " is null\r\n");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is null");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
                             }
 
                         }
-
-
-                        //if (AlphaNumeric.IsMatch(routeId))
-                        //var list = new List<string> {routeId, walkSequence, pageNumber, readSequence, handheldId, readDirection, noOfDials, idExpected, idCaptured, idOverride, decimalLocation, meterReading, readingOverride, highReadingLimit, lowReadingLimit, dateToRead, dateToExport, notes, locationCode, meterReaderCode, recordType, recordStatus, date, time, typeOfReading, networkNumber, readAttempts, userCharacters, manufacturer, activeInactive, typeOfMeter, readFailCode, prevReading, prevReadingDate, display11, display12, display13, display14, display21, display22, display23, display24, display25, display26, display27, display28, display2OpCode, utilityField};
-
-
-                        //string carriageReturn;
-                        //string lineFeed;
-                        //if(lineLength == 507)
-                        //{
-
-                        //    carriageReturn = line.Substring(507, 1);
-                        //    lineFeed = line.Substring(508, 1);
-                        //    lineLengthMet = true;
-                        //}
-                        //if (lineLength == 511)
-                        //{
-                        //    carriageReturn = line.Substring(511, 1);
-                        //    lineFeed = line.Substring(512, 1);
-                        //    lineLengthMet = true;
-                        //}
-                        //if(!lineLengthMet)
-                        //{
-                        //    MessageBox.Show("invalid line length");
-                        //    break;
-                        //}
-
-
-                        //if (AlphaNumeric.IsMatch(routeId))
-                        //{
-                        //    MessageBox.Show("Line  " + counter + ": routeID is AlphaNumeric");
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("Line  " + counter + ": routeID is not AlphaNumeric");
-                        //}
-
-                        //if (Numeric.IsMatch(pageNumber))
-                        //{
-                        //    MessageBox.Show("Line  " + counter + ": pageNumber is Numeric");
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("Line  " + counter + ": pageNumber is not Numeric");
-                        //}
-
-
-                        //System.Windows.Forms.MessageBox.Show(display27);
-                        //, pageNumber, readSequence, handheldId, readDirection,noOfDials, idExpected, idCaptured, idOverride, decimalLocation, meterReading, readingOverride, highReadingLimit,lowReadingLimit, dateToRead, dateToExport, notes, locationCode, meterReaderCode, recordType, recordStatus, date, time, typeOfReading, networkNumber,readAttempts, userCharacters, manufacturer, activeInactive, typeOfMeter, readFailCode, prevReading, prevReadingDate, display11, display12, display13, display14,display21, display22, display23, display24, display25, display26, display27, display28, display2OpCode, utilityField
+                        countOfList = 0;
+                        foreach (string item in notrequiredNumber)
+                        {
+                            countOfList++;
+                            if (countOfList == 1)
+                            {
+                                variableName = "walkSequence";
+                            }
+                            if (countOfList == 2)
+                            {
+                                variableName = "dateToRead";
+                            }
+                            if (countOfList == 3)
+                            {
+                                variableName = "dateToExport";
+                            }
+                            if (countOfList == 4)
+                            {
+                                variableName = "prevReading";
+                            }
+                            if (countOfList == 5)
+                            {
+                                variableName = "prevReadingDate";
+                            }
+                            if (Numeric.IsMatch(item))
+                            {
+                                if (item != "")
+                                {
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
+                                }
+                                else
+                                {
+                                    //sw.Write("Line: " + counter + " - " + variableName + " " + item + " is null\r\n");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is null");
+                                }
+                            }
+                            else
+                            {
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not numeric");
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not numeric");
+                            }
+                        }
+                        countOfList = 0;
+                        foreach (string item in notRequiredBlank)
+                        {
+                            countOfList++;
+                            if (countOfList == 1)
+                            {
+                                variableName = "handheldId";
+                            }
+                            if (countOfList == 2)
+                            {
+                                variableName = "idCaptured";
+                            }
+                            if (countOfList == 3)
+                            {
+                                variableName = "idOverride";
+                            }
+                            if (countOfList == 4)
+                            {
+                                variableName = "meterReading";
+                            }
+                            if (countOfList == 5)
+                            {
+                                variableName = "readingOverride";
+                            }
+                            if (countOfList == 6)
+                            {
+                                variableName = "notes";
+                            }
+                            if (countOfList == 7)
+                            {
+                                variableName = "meterReaderCode";
+                            }
+                            if (countOfList == 8)
+                            {
+                                variableName = "date";
+                            }
+                            if (countOfList == 9)
+                            {
+                                variableName = "time";
+                            }
+                            if (countOfList == 10)
+                            {
+                                variableName = "typeOfReading";
+                            }
+                            if (countOfList == 11)
+                            {
+                                variableName = "networkNumber";
+                            }
+                            if (countOfList == 12)
+                            {
+                                variableName = "readAttempts";
+                            }
+                            if (countOfList == 13)
+                            {
+                                variableName = "userCharacters";
+                            }
+                            if (countOfList == 14)
+                            {
+                                variableName = "manufacturer";
+                            }
+                            if (countOfList == 15)
+                            {
+                                variableName = "readFailCode";
+                            }
+                            if (countOfList == 16)
+                            {
+                                variableName = "typeOfMeter";
+                            }
+                            if (countOfList == 17)
+                            {
+                                variableName = "display2OpCode";
+                            }
+                            if (item != "")
+                            {
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " should be null");
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
+                            }
+                            else
+                            {
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is null");
+                            }
+                        }
                         counter++;
                     }
 
+                    counter--; //Outputs the correct number of lines in the next line of code
+                    sw.WriteLine("There were {0} lines.", counter);
+                    file.Dispose();
                     file.Close();
-                    System.Console.WriteLine("There were {0} lines.", counter);
                     // Suspend the screen.  
-                    System.Console.ReadLine();
                 }
 
                 if (radioButton2.Checked == true)
