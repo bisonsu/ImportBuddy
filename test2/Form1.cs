@@ -125,10 +125,12 @@ namespace test2
             }
         }
 
-        Regex Alpha = new Regex("^[a-zA-Z0-9]*$");
+        Regex Alpha = new Regex("^[a-zA-Z]*$");
         Regex Numeric = new Regex("^[a-zA-Z0-9]*$");
         Regex AlphaNumeric = new Regex("^[a-zA-Z0-9 ]*$");
-        Regex AorI = new Regex("^[aAiI]*$");
+        Regex AorI = new Regex("^[aAiI ]*$");
+        Regex RecordTypeStatus = new Regex("^[a-zA-Z ]*$");
+        Regex DisplayFields = new Regex("^[a-zA-Z0-9()* :;,&.'!@#=~/\"-]*$");
 
 
 
@@ -140,7 +142,7 @@ namespace test2
                 return;
             }
 
-            if (checkBox1.Checked == false & checkBox2.Checked == false & checkBox3.Checked == false & checkBox4.Checked == false)
+            if (checkBox1.Checked == false & checkBox2.Checked == false)
             {
                 MessageBox.Show("Must select output option to begin.");
             }
@@ -155,14 +157,11 @@ namespace test2
 
                 if(radioButton1.Checked == true)//EZR
                 {
-                    
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
                     outputFile = textBox1.Text + "\\" + FileNameOnly + ".datavalidation";
+                    System.IO.File.WriteAllText(outputFile, string.Empty);
                     StreamWriter sw = new StreamWriter(File.OpenWrite(outputFile));
-
-
-                    //sw.Write("test");
-                    MessageBox.Show(outputFile);
-
+                    
                     int counter = 1;
                     string line;
 
@@ -204,7 +203,7 @@ namespace test2
                         string readAttempts = line.Substring(150,1).Trim();
                         string userCharacters = line.Substring(151,7).Trim();
                         string manufacturer = line.Substring(158,1).Trim();
-                        string activeInactive = line.Substring(159,1).Trim();
+                        string activeInactive = line.Substring(159,1);
                         string typeOfMeter = line.Substring(160,1).Trim();
                         string readFailCode = line.Substring(161,1).Trim();
                         string prevReading = line.Substring(162,10).Trim();
@@ -225,12 +224,14 @@ namespace test2
                         string utilityField = line.Substring(467,40).Trim();
 
 
-                        var requiredAlphaNumeric = new List<string> { routeId, readDirection, noOfDials, idExpected, recordType, recordStatus };
+                        var requiredAlphaNumeric = new List<string> { routeId, readDirection, noOfDials};
                         var requiredAorI = new List<string> { activeInactive };
                         var requiredNumber = new List<string> { pageNumber, readSequence, decimalLocation, highReadingLimit, lowReadingLimit };
-                        var notRequiredAlphaNumeric = new List<string> { locationCode, utilityField, display11, display12, display13, display14, display21, display22, display23, display24, display25, display26, display27, display28 };
+                        var notRequiredAlphaNumeric = new List<string> { locationCode, typeOfMeter, idExpected , manufacturer};
                         var notrequiredNumber = new List<string> { walkSequence, dateToRead, dateToExport, prevReading, prevReadingDate };
-                        var notRequiredBlank = new List<string> { handheldId, idCaptured, idOverride, meterReading, readingOverride, notes, meterReaderCode, date, time, typeOfReading, networkNumber, readAttempts, userCharacters, manufacturer, readFailCode, typeOfMeter, display2OpCode };
+                        var notRequiredBlank = new List<string> { handheldId, idCaptured, idOverride, meterReading, readingOverride, notes, meterReaderCode, date, time, typeOfReading, networkNumber, readAttempts, userCharacters, readFailCode, display2OpCode };
+                        var notRequiredDisplayFields = new List<string> { utilityField, display11, display12, display13, display14, display21, display22, display23, display24, display25, display26, display27, display28 };
+                        var recordTypeStatus = new List<string> { recordType, recordStatus };
 
                         int countOfList = 0;
                         string variableName = "";
@@ -248,18 +249,6 @@ namespace test2
                             if (countOfList == 3)
                             {
                                 variableName = "noOfDials";
-                            }
-                            if (countOfList == 4)
-                            {
-                                variableName = "idExpected";
-                            }
-                            if (countOfList == 5)
-                            {
-                                variableName = "recordType";
-                            }
-                            if (countOfList == 6)
-                            {
-                                variableName = "recordStatus";
                             }
 
                             if (AlphaNumeric.IsMatch(item))
@@ -287,19 +276,19 @@ namespace test2
                             variableName = "Active or Inactive";
                             if (AorI.IsMatch(item))
                             {
-                                if (item != "")
+                                if (item == "A" | item == "I" | item == " ")
                                 {
                                     //MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is valid");
                                 }
                                 else
                                 {
-                                    sw.WriteLine("Line: " + counter + " -" + variableName + " " + item + " is not valid");
+                                    sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not valid");
                                     //MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is not valid");
                                 }
                             }
                             else
                             {
-                                sw.WriteLine("Line: " + counter + " -" + variableName + " " + item + " is not A or I");
+                                sw.WriteLine("Line: " + counter + " -" + variableName + " " + item + " is not A, I, or blank");
                                 //MessageBox.Show("Line: " + counter + " -" + variableName + " " + item + " is not A or I");
                             }
                         }
@@ -354,57 +343,18 @@ namespace test2
                             {
                                 variableName = "locationCode";
                             }
+                            
                             if (countOfList == 2)
                             {
-                                variableName = "utilityField";
+                                variableName = "typeOfMeter";
                             }
                             if (countOfList == 3)
                             {
-                                variableName = "display11";
+                                variableName = "idExpected";
                             }
                             if (countOfList == 4)
                             {
-                                variableName = "display12";
-                            }
-                            if (countOfList == 5)
-                            {
-                                variableName = "display13";
-                            }
-                            if (countOfList == 6)
-                            {
-                                variableName = "display14";
-                            }
-                            if (countOfList == 7)
-                            {
-                                variableName = "display21";
-                            }
-                            if (countOfList == 8)
-                            {
-                                variableName = "display22";
-                            }
-                            if (countOfList == 9)
-                            {
-                                variableName = "display23";
-                            }
-                            if (countOfList == 10)
-                            {
-                                variableName = "display24";
-                            }
-                            if (countOfList == 11)
-                            {
-                                variableName = "display25";
-                            }
-                            if (countOfList == 12)
-                            {
-                                variableName = "display26";
-                            }
-                            if (countOfList == 13)
-                            {
-                                variableName = "display27";
-                            }
-                            if (countOfList == 14)
-                            {
-                                variableName = "display28";
+                                variableName = "idExpected";
                             }
 
                             if (AlphaNumeric.IsMatch(item))
@@ -526,17 +476,9 @@ namespace test2
                             }
                             if (countOfList == 14)
                             {
-                                variableName = "manufacturer";
-                            }
-                            if (countOfList == 15)
-                            {
                                 variableName = "readFailCode";
                             }
-                            if (countOfList == 16)
-                            {
-                                variableName = "typeOfMeter";
-                            }
-                            if (countOfList == 17)
+                            if (countOfList == 15)
                             {
                                 variableName = "display2OpCode";
                             }
@@ -550,14 +492,122 @@ namespace test2
                                 //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is null");
                             }
                         }
-                        counter++;
+                        countOfList = 0;
+                        foreach (string item in notRequiredDisplayFields)
+                        {
+                            countOfList++;
+                            if (countOfList == 1)
+                            {
+                                variableName = "utilityField";
+                            }
+                            if (countOfList == 2)
+                            {
+                                variableName = "display11";
+                            }
+                            if (countOfList == 3)
+                            {
+                                variableName = "display12";
+                            }
+                            if (countOfList == 4)
+                            {
+                                variableName = "display13";
+                            }
+                            if (countOfList == 5)
+                            {
+                                variableName = "display14";
+                            }
+                            if (countOfList == 6)
+                            {
+                                variableName = "display21";
+                            }
+                            if (countOfList == 7)
+                            {
+                                variableName = "display22";
+                            }
+                            if (countOfList == 8)
+                            {
+                                variableName = "display23";
+                            }
+                            if (countOfList == 9)
+                            {
+                                variableName = "display24";
+                            }
+                            if (countOfList == 10)
+                            {
+                                variableName = "display25";
+                            }
+                            if (countOfList == 11)
+                            {
+                                variableName = "display26";
+                            }
+                            if (countOfList == 12)
+                            {
+                                variableName = "display27";
+                            }
+                            if (countOfList == 13)
+                            {
+                                variableName = "display28";
+                            }
+                            if (DisplayFields.IsMatch(item))
+                            {
+                                if (item != "")
+                                {
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is valid");
+                                }
+                                else
+                                {
+                                    //sw.Write("Line: " + counter + " - " + variableName + " " + item + " is null\r\n");
+                                    //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is null");
+                                }
+                                if(item == "" && variableName == "display11")
+                                {
+                                    sw.WriteLine("Display 11 is not used. It is recommended to have the address field populated here.");
+                                }
+                            }
+                            else
+                            {
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not alphanumeric");
+                                //MessageBox.Show("Line: " + counter + " - " + variableName + " " + item + " is not numeric");
+                            }
+                        }
+                        countOfList = 0;
+                        foreach (string item in recordTypeStatus)
+                        {
+                            countOfList++;
+                            if (countOfList == 1)
+                            {
+                                variableName = "recordType";
+                            }
+                            if (countOfList == 1)
+                            {
+                                variableName = "recordStatus";
+                            }
+                            if(RecordTypeStatus.IsMatch(item))
+                            {
+
+                            }
+                            else
+                            {
+                                sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not valid");
+                            }
+
+                        }
+
+                            counter++;//Increases the line number for logging
                     }
 
                     counter--; //Outputs the correct number of lines in the next line of code
+
                     sw.WriteLine("There were {0} lines.", counter);
-                    file.Dispose();
-                    file.Close();
+                    watch.Stop();
+                    var elapsedMS = watch.ElapsedMilliseconds;
+                    sw.WriteLine("Time taken: {0}ms", elapsedMS);
+                    sw.Dispose();
+                    sw.Close();
+
+                    MessageBox.Show("Validation file complete. Location of validation file is: " + outputFile);
                     // Suspend the screen.  
+                       
                 }
 
                 if (radioButton2.Checked == true)
@@ -575,12 +625,6 @@ namespace test2
                 outputFile = textBox1.Text + "\\" + FileNameOnly + ".csv";
                 MessageBox.Show(outputFile);
 
-            }
-
-            if (checkBox3.Checked == true)
-            {
-                //Include line numbers with each MIU if Checkbox 2 is selected
-                //Include line numbers with each error if Checkbox 1 is selected
             }
 
             //Append to log file the Errors received with Import Buddy
