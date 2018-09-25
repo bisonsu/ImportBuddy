@@ -3,11 +3,33 @@ add MIU, Address, and "Z" option
 have checklistbox disabled unless extraction is selected
 save code before making the change below
 Change Checkboxes for validation/extraction to radio buttons
-Add to do from home
 prioritize next feature to work on
 is there a need for email sender?
 Require MIU Id be in range if Z
 Get all possible MIU ranges
+Validate file format data requirements for EZR
+Validate file format data requirements for EZP
+Add Regex to find CRL
+Review each if statement for ile to write errors in output file
+verify each date if validationreview each field to confirm correct alphanumeric, numeric, alpha characters
+upload log file to s3
+upload file used
+upload output file to S3
+log file includes any error user may see
+log file includes # of MIUs
+log file includes each validation failed
+log file includes output file location
+log file includes counter of times used
+update help link
+update about link
+about link provides version and author
+about link provides option to submit feature request
+help link includes instructions
+data extraction creates csv file
+add options for additional extraction fields
+create free S3 account
+purge files older than 30 days in S3 except for counter
+
 
 
 Done
