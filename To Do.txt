@@ -29,6 +29,7 @@ data extraction creates csv file
 add options for additional extraction fields
 create free S3 account
 purge files older than 30 days in S3 except for counter
+add extraction for each meter type read type pair
 
 
 
