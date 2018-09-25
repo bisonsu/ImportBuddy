@@ -1,0 +1,23 @@
+To Do
+add MIU, Address, and "Z" option
+have checklistbox disabled unless extraction is selected
+save code before making the change below
+Change Checkboxes for validation/extraction to radio buttons
+Add to do from home
+prioritize next feature to work on
+is there a need for email sender?
+Require MIU Id be in range if Z
+Get all possible MIU ranges
+
+
+Done
+Follow requirements from EZRoute File Format located in File Formats folder
+Add elapsed time to log file
+add extraction option
+remove the last two checkboxes
+Type of Meter can be populated. Will be overwritten
+If validation file exists, delete it or delete contents
+IDExpected can be blank
+:-;.!@# - add these symbols to allowed characters in display fields and utility field for EZR
+Record Status can be blank
+Active/Inactive can be blank
