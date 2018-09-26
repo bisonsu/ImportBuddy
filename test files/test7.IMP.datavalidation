@@ -1,16 +1,2 @@
-Line: 6 - idExpected 00664-00 is not alphanumeric
-Line: 25 - idExpected 00003-00 is not alphanumeric
-Line: 49 - idExpected 00028-05 is not alphanumeric
-Line: 96 - idExpected 00346-00 is not alphanumeric
-Line: 181 - idExpected 00474-00 is not alphanumeric
-Line: 197 - idExpected 00609-03 is not alphanumeric
-Line: 204 - idExpected 00631-OW is not alphanumeric
-Line: 223 - idExpected 00526-00 is not alphanumeric
-Line: 268 - idExpected 00413-00 is not alphanumeric
-Line: 366 - idExpected 00305-02 is not alphanumeric
-Line: 431 - idExpected 00364-00 is not alphanumeric
-Line: 433 - idExpected 00369-00 is not alphanumeric
-Line: 543 - idExpected 00395-00 is not alphanumeric
-Line: 579 - idExpected 00604-00 is not alphanumeric
 There were 636 lines.
-Time taken: 31ms
+Time taken: 2027ms

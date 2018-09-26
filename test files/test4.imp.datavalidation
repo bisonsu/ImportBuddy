@@ -1,0 +1,14 @@
+Line: 2 - readDirection $ is not alphanumeric
+Line: 2 - idExpected 0100+000 is not valid
+Line: 3 -Active or Inactive B is not A, I, or blank
+Line: 4 - readDirection  is not valid
+Line: 4 - noOfDials  is not valid
+Line: 5 - Active or Inactive a is not valid
+Line: 6 -Active or Inactive c is not A, I, or blank
+Line: 7 - Active or Inactive i is not valid
+Line: 332 - pageNumber  is not valid
+Line: 333 - pageNumber  is not valid
+Line: 662 - pageNumber  is not valid
+Line: 1387 - idExpected 02013951 is not a valid MIU number
+There were 3943 lines.
+Time taken: 180ms

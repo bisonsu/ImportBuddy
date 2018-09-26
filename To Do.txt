@@ -1,39 +1,44 @@
 To Do
-add MIU, Address, and "Z" option
-have checklistbox disabled unless extraction is selected
-save code before making the change below
-Change Checkboxes for validation/extraction to radio buttons
-prioritize next feature to work on
-is there a need for email sender?
-Require MIU Id be in range if Z
-Get all possible MIU ranges
 Validate file format data requirements for EZR
 Validate file format data requirements for EZP
-Add Regex to find CRL
-Review each if statement for ile to write errors in output file
-verify each date if validationreview each field to confirm correct alphanumeric, numeric, alpha characters
+Add Regex to find CRLF
+Review each if statement for line to write errors in output file
+verify each date if validation
+review each field to confirm correct alphanumeric, numeric, alpha characters
+log file includes each validation failed
+add extraction for each meter type read type pair
+create free S3 account
+log file includes output file location
+log file includes any error user may see
+Require MIU Id be in range if Z
+add MIU, Address, and "Z" option
+save code before making the change below
 upload log file to s3
 upload file used
 upload output file to S3
-log file includes any error user may see
 log file includes # of MIUs
-log file includes each validation failed
-log file includes output file location
 log file includes counter of times used
+help link includes instructions
+data extraction creates csv file
+add options for additional extraction fields
 update help link
 update about link
 about link provides version and author
 about link provides option to submit feature request
-help link includes instructions
-data extraction creates csv file
-add options for additional extraction fields
-create free S3 account
 purge files older than 30 days in S3 except for counter
-add extraction for each meter type read type pair
+have checklistbox disabled unless extraction is selected
+Change Checkboxes for validation/extraction to radio buttons
+is there a need for email sender?
+should there be a save file log instead of output directory+filename+.datavalidation/.csv
+email info if needed (NeptuneImportBuddy@gmail.com StrongNeptune#1)
+append log file on s3 with computer name and increment counter
+debate changing the check for page number
 
 
 
 Done
+Get all possible MIU ranges
+ID can contain - if not Z
 Follow requirements from EZRoute File Format located in File Formats folder
 Add elapsed time to log file
 add extraction option

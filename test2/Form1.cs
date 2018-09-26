@@ -131,6 +131,8 @@ namespace test2
         Regex AorI = new Regex("^[aAiI ]*$");
         Regex RecordTypeStatus = new Regex("^[a-zA-Z ]*$");
         Regex DisplayFields = new Regex("^[a-zA-Z0-9()* :;,&.'!@#=~/\"-]*$");
+        Regex IDExpected = new Regex("^[a-zA-Z0-9 -]*$");
+        Regex RadioIDExpected = new Regex("^[0-3][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
 
 
 
@@ -172,8 +174,18 @@ namespace test2
                         int lineLength = line.Length;
                         bool lineLengthMet = false;
                         string lineLengthString;
-
+                        string crlf = "";
+                        //if (lineLength == 511)
+                        //{
+                        //    crlf = line.Substring(511, 2);
+                        //}
+                        //if(lineLength == 507)
+                        //{
+                        //    crlf = line.Substring(507, 2);
+                        //}
                         System.Console.WriteLine(line);
+                        System.Console.WriteLine(lineLength);
+
                         string routeId = line.Substring(0,10).Trim();
                         string walkSequence = line.Substring(10,4).Trim();
                         string pageNumber = line.Substring(14,4).Trim();
@@ -227,11 +239,12 @@ namespace test2
                         var requiredAlphaNumeric = new List<string> { routeId, readDirection, noOfDials};
                         var requiredAorI = new List<string> { activeInactive };
                         var requiredNumber = new List<string> { pageNumber, readSequence, decimalLocation, highReadingLimit, lowReadingLimit };
-                        var notRequiredAlphaNumeric = new List<string> { locationCode, typeOfMeter, idExpected , manufacturer};
+                        var notRequiredAlphaNumeric = new List<string> { locationCode, typeOfMeter , manufacturer};
                         var notrequiredNumber = new List<string> { walkSequence, dateToRead, dateToExport, prevReading, prevReadingDate };
                         var notRequiredBlank = new List<string> { handheldId, idCaptured, idOverride, meterReading, readingOverride, notes, meterReaderCode, date, time, typeOfReading, networkNumber, readAttempts, userCharacters, readFailCode, display2OpCode };
                         var notRequiredDisplayFields = new List<string> { utilityField, display11, display12, display13, display14, display21, display22, display23, display24, display25, display26, display27, display28 };
                         var recordTypeStatus = new List<string> { recordType, recordStatus };
+                        var idExpectedCheck = new List<string> { idExpected };
 
                         int countOfList = 0;
                         string variableName = "";
@@ -350,11 +363,7 @@ namespace test2
                             }
                             if (countOfList == 3)
                             {
-                                variableName = "idExpected";
-                            }
-                            if (countOfList == 4)
-                            {
-                                variableName = "idExpected";
+                                variableName = "manufacturer";
                             }
 
                             if (AlphaNumeric.IsMatch(item))
@@ -591,6 +600,37 @@ namespace test2
                                 sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not valid");
                             }
 
+                        }
+                        countOfList = 0;
+                        foreach ( string item in idExpectedCheck)
+                        {
+                            countOfList++;
+                            if(countOfList ==1)
+                            {
+                                variableName = "idExpected";
+                                if (recordStatus == "Z" | recordStatus == "z")
+                                {
+                                    if (RadioIDExpected.IsMatch(item))
+                                    {
+                                        //verified, do nothing
+                                    }
+                                    else
+                                    {
+                                        sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not a valid MIU number");
+                                    }
+                                }
+                                else
+                                {
+                                    if (IDExpected.IsMatch(item))
+                                    {
+                                        //verified, do nothing
+                                    }
+                                    else
+                                    {
+                                        sw.WriteLine("Line: " + counter + " - " + variableName + " " + item + " is not valid");
+                                    }
+                                }
+                            }
                         }
 
                             counter++;//Increases the line number for logging
